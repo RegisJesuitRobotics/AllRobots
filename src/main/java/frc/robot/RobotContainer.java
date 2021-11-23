@@ -6,6 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveDistance;
 import frc.robot.commands.DriveTime;
 // import frc.robot.commands.ExampleCommand;
@@ -21,12 +23,16 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  enum Robots {
+    VEX,
+    ROMI
+  }
 
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final SendableChooser<Robots> robotChooser = new SendableChooser<>();
 
   // Subsystems
-  ISubsystems subsystems = new frc.robot.subsystems.romi.RomiSubsystems();
+  ISubsystems subsystems;
+  // ISubsystems subsystems = new frc.robot.subsystems.romi.RomiSubsystems();
   // ISubsystems subsystems = new frc.robot.subsystems.vex.VexSubsystems();
 
   // Commands
@@ -37,6 +43,16 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
+    robotChooser.addOption("Vex", Robots.VEX);
+    robotChooser.addOption("Romi", Robots.ROMI);
+    SmartDashboard.putData(robotChooser);
+
+    if (robotChooser.getSelected() == Robots.VEX) {
+      subsystems = new frc.robot.subsystems.vex.VexSubsystems();
+    }
+    else {
+      subsystems = new frc.robot.subsystems.romi.RomiSubsystems();
+    }
   }
 
   /**
