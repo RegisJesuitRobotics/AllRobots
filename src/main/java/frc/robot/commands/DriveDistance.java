@@ -17,9 +17,9 @@ public class DriveDistance extends CommandBase {
 
     /** Creates a new DriveDistance. */
     public DriveDistance(
-            double speed, double distance, IChassis chassis, AbsWheelEncoders encoders) {
+            double speed, double distanceMeters, IChassis chassis, AbsWheelEncoders encoders) {
         this.speed = speed;
-        this.distance = distance;
+        this.distance = distanceMeters;
         this.chassis = chassis;
         this.encoders = encoders;
 

@@ -71,7 +71,7 @@ public class RobotContainer {
         // return m_autoCommand;
         // return null;
         // return new DriveTime(-0.8, 5, subsystems.getChassis());
-        return new DriveDistance(-0.8, 24, subsystems.getChassis(), subsystems.getWheelEncoders());
+        return new DriveDistance(-0.8, 0.5, subsystems.getChassis(), subsystems.getWheelEncoders());
     }
 
     public Command getDriveCommand() {

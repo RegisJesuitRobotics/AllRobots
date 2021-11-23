@@ -12,9 +12,9 @@ public class RomiConstants {
     public static final int RIGHT_ENCODER_PORT1 = 6;
     public static final int RIGHT_ENCODER_PORT2 = 7;
 
-    private static final double kCountsPerRevolution = 1440.0;
-    private static final double kWheelDiameterInch = 2.75591; // 70 mm
+    private static final double COUNTS_PER_REVOLUTION = 1440.0;
+    private static final double WHEEL_DIAMETER_METERS = 0.07; // 70 mm
 
     public static final double DISTANCE_PER_PULSE =
-            (Math.PI * kWheelDiameterInch) / kCountsPerRevolution;
+            (Math.PI * WHEEL_DIAMETER_METERS) / COUNTS_PER_REVOLUTION;
 }
