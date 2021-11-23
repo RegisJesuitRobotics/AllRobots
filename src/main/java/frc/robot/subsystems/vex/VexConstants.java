@@ -2,6 +2,8 @@ package frc.robot.subsystems.vex;
 
 public class VexConstants {
 
+    private VexConstants() {}
+
     // Motors
     public static int LEFT_MOTOR_PORT = 0;
     public static int RIGHT_MOTOR_PORT = 1;
