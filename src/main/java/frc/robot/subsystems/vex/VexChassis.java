@@ -9,7 +9,7 @@ public class VexChassis extends SubsystemBase implements IChassis {
     private final Spark leftMotor;
     private final Spark rightMotor;
     private final DifferentialDrive drive;
-  
+
     public VexChassis() {
         leftMotor = new Spark(VexConstants.LEFT_MOTOR_PORT);
         rightMotor = new Spark(VexConstants.RIGHT_MOTOR_PORT);

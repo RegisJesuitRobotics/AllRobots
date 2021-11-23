@@ -8,5 +8,4 @@ public class RomiWheelEncoders extends AbsWheelEncoders {
     public RomiWheelEncoders(IEncoder leftEncoder, IEncoder rightEncoder) {
         super(leftEncoder, rightEncoder);
     }
-    
 }

@@ -6,10 +6,10 @@ import frc.robot.sensors.IEncoder;
 public class VexEncoder implements IEncoder {
 
     private final Counter encoder;
-    
+
     public VexEncoder(int port, double distancePerPulse) {
         encoder = new Counter(port);
-        
+
         encoder.setDistancePerPulse(distancePerPulse);
     }
 
@@ -27,5 +27,4 @@ public class VexEncoder implements IEncoder {
     public double getDistance() {
         return encoder.getDistance();
     }
-    
 }

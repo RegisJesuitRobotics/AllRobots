@@ -11,11 +11,12 @@ public class VexSubsystems implements ISubsystems {
     private final VexChassis chassis = new VexChassis();
 
     private final DriverXbox360 driver = new DriverXbox360();
-    
-    private final VexWheelEncoders wheelEncoders = 
-        new VexWheelEncoders(
-            new VexEncoder(VexConstants.LEFT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE), 
-            new VexEncoder(VexConstants.RIGHT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE));
+
+    private final VexWheelEncoders wheelEncoders =
+            new VexWheelEncoders(
+                    new VexEncoder(VexConstants.LEFT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE),
+                    new VexEncoder(
+                            VexConstants.RIGHT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE));
 
     @Override
     public IChassis getChassis() {
@@ -31,5 +32,4 @@ public class VexSubsystems implements ISubsystems {
     public AbsWheelEncoders getWheelEncoders() {
         return wheelEncoders;
     }
-    
 }

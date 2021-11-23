@@ -1,7 +1,7 @@
 package frc.robot.subsystems.driver;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.IDriver;
 
 public class DriverXbox360 implements IDriver {
@@ -17,5 +17,4 @@ public class DriverXbox360 implements IDriver {
     public double getY() {
         return joy.getY(Hand.kLeft);
     }
-    
 }

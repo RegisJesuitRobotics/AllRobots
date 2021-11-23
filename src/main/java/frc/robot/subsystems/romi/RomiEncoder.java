@@ -10,10 +10,10 @@ import frc.robot.sensors.IEncoder;
 public class RomiEncoder implements IEncoder {
 
     private final Encoder encoder;
-    
+
     public RomiEncoder(int port1, int port2, double distancePerPulse) {
         encoder = new Encoder(port1, port2);
-        
+
         encoder.setDistancePerPulse(distancePerPulse);
     }
 

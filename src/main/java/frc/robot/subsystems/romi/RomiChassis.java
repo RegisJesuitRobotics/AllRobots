@@ -25,5 +25,4 @@ public class RomiChassis extends SubsystemBase implements IChassis {
     public void drive(double speed, double rot) {
         diffDrive.arcadeDrive(speed, rot);
     }
-    
 }
