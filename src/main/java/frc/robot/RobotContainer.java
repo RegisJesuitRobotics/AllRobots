@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.DriveDistance;
+import frc.robot.commands.DriveDistancePidGyro;
 // import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ISubsystems;
 
@@ -30,8 +31,7 @@ public class RobotContainer {
     private final SendableChooser<Robots> robotChooser = new SendableChooser<>();
 
     // Subsystems
-    ISubsystems subsystems;
-    // ISubsystems subsystems = new frc.robot.subsystems.romi.RomiSubsystems();
+    ISubsystems subsystems = new frc.robot.subsystems.romi.RomiSubsystems();
     // ISubsystems subsystems = new frc.robot.subsystems.vex.VexSubsystems();
 
     // Commands
@@ -46,11 +46,13 @@ public class RobotContainer {
         robotChooser.addOption("Romi", Robots.ROMI);
         SmartDashboard.putData(robotChooser);
 
-        if (robotChooser.getSelected() == Robots.VEX) {
-            subsystems = new frc.robot.subsystems.vex.VexSubsystems();
-        } else {
-            subsystems = new frc.robot.subsystems.romi.RomiSubsystems();
-        }
+        // if (robotChooser.getSelected() == Robots.VEX) {
+        //     subsystems = new frc.robot.subsystems.vex.VexSubsystems();
+        // } else {
+        //     subsystems = new frc.robot.subsystems.romi.RomiSubsystems();
+        // }
+
+        subsystems.initialize();
     }
 
     /**
@@ -70,8 +72,15 @@ public class RobotContainer {
         // An ExampleCommand will run in autonomous
         // return m_autoCommand;
         // return null;
-        // return new DriveTime(-0.8, 5, subsystems.getChassis());
-        return new DriveDistance(-0.8, 0.5, subsystems.getChassis(), subsystems.getWheelEncoders());
+        // return new DriveTime(0.8, 5, subsystems.getChassis());
+        // return new DriveDistance(0.8, 1, subsystems.getChassis(), subsystems.getWheelEncoders());
+        return new DriveDistancePidGyro(
+            0.8,
+            1,
+            subsystems.getChassis(),
+            subsystems.getWheelEncoders(),
+            subsystems.getGyro(),
+            subsystems.getPidDriveWithGyro());
     }
 
     public Command getDriveCommand() {

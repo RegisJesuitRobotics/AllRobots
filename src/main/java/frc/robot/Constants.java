@@ -17,8 +17,4 @@ public final class Constants {
     public static final double FORWARD_SPEED = 3.0;
 
     public static double gyroVoltsPerDegreePerSecond = 0.0128;
-
-    public static double kP = 0.2;
-    public static double kI = 0.0;
-    public static double kD = 0.0;
 }

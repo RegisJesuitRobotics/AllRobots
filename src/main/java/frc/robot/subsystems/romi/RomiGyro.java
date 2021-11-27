@@ -1,9 +1,11 @@
 package frc.robot.subsystems.romi;
 
-import frc.robot.sensors.IGyro;
 import edu.wpi.first.hal.SimDevice;
 import edu.wpi.first.hal.SimDevice.Direction;
 import edu.wpi.first.hal.SimDouble;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.sensors.IGyro;
 
 public class RomiGyro implements IGyro {
 
@@ -34,6 +36,10 @@ public class RomiGyro implements IGyro {
     }
 
     @Override
+    public void calibrate() {
+    }
+
+    @Override
     public void reset() {
         if (m_simAngleX != null) {
             m_angleXOffset = m_simAngleX.get();
@@ -45,7 +51,9 @@ public class RomiGyro implements IGyro {
     @Override
     public double getAngleZ() {
         if (m_simAngleZ != null) {
-            return m_simAngleZ.get() - m_angleZOffset;
+            double angle = m_simAngleZ.get() - m_angleZOffset;
+            SmartDashboard.putString("Gyro", String.format("%.3f", angle));
+            return angle;
         }
 
         return 0.0;
@@ -115,4 +123,10 @@ public class RomiGyro implements IGyro {
 
         return 0.0;
     }
+
+    // @Override
+    // public void initSendable(SendableBuilder builder) {
+    //     // TODO Auto-generated method stub
+
+    // }
 }

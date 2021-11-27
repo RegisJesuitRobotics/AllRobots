@@ -1,14 +1,21 @@
 package frc.robot.subsystems.vex;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.sensors.IGyro;
 
 public class VexGyro implements IGyro {
 
-    private final AnalogGyro gyro;
+    private final ADXRS450_Gyro gyro;
 
     public VexGyro() {
-        gyro = new AnalogGyro(VexConstants.GyroPort);
+        gyro = new ADXRS450_Gyro(VexConstants.GyroPort);
+    }
+
+    @Override
+    public void calibrate() {
+        gyro.calibrate();
     }
 
     @Override
@@ -18,7 +25,17 @@ public class VexGyro implements IGyro {
 
     @Override
     public double getAngleZ() {
-        return gyro.getAngle();
+        double angle = gyro.getAngle();
+        SmartDashboard.putString("Gyro", String.format("%.3f", angle));
+        return angle;
     }
-    
+
+    // private void setAngleZ() {}
+
+    // @Override
+    // public void initSendable(SendableBuilder builder) {
+    //     builder.setSmartDashboardType("Gyro");
+    //     builder.addDoubleProperty("AngleZ", getAngleZ(), setAngleZ());
+    //     builder.ad
+    // }
 }

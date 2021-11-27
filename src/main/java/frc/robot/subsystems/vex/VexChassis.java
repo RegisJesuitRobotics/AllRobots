@@ -16,7 +16,7 @@ public class VexChassis extends SubsystemBase implements IChassis {
 
         drive = new DifferentialDrive(leftMotor, rightMotor);
     }
-    
+
     @Override
     public void initialize() {
         drive.setSafetyEnabled(false);
@@ -25,6 +25,6 @@ public class VexChassis extends SubsystemBase implements IChassis {
 
     @Override
     public void drive(double speed, double rot) {
-        drive.arcadeDrive(speed, -rot);
+        drive.arcadeDrive(-speed, -rot);
     }
 }

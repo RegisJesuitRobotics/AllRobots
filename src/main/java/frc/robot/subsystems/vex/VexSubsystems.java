@@ -1,5 +1,6 @@
 package frc.robot.subsystems.vex;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
 import frc.robot.sensors.AbsWheelEncoders;
 import frc.robot.sensors.IGyro;
 import frc.robot.subsystems.IChassis;
@@ -13,11 +14,21 @@ public class VexSubsystems implements ISubsystems {
 
     private final DriverXbox360 driver = new DriverXbox360();
 
-    private final VexWheelEncoders wheelEncoders = new VexWheelEncoders(
-            new VexEncoder(VexConstants.LEFT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE),
-            new VexEncoder(VexConstants.RIGHT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE));
+    private final VexWheelEncoders wheelEncoders =
+            new VexWheelEncoders(
+                    new VexEncoder(VexConstants.LEFT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE),
+                    new VexEncoder(
+                            VexConstants.RIGHT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE));
+
+    private final PIDController pidDriveWithGyro =
+            new PIDController(VexConstants.kP, VexConstants.kI, VexConstants.kD);
 
     private final VexGyro gyro = new VexGyro();
+
+    @Override
+    public void initialize() {
+        gyro.calibrate();
+    }
 
     @Override
     public IChassis getChassis() {
@@ -37,5 +48,10 @@ public class VexSubsystems implements ISubsystems {
     @Override
     public IGyro getGyro() {
         return gyro;
+    }
+
+    @Override
+    public PIDController getPidDriveWithGyro() {
+        return pidDriveWithGyro;
     }
 }

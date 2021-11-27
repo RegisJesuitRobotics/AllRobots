@@ -17,4 +17,8 @@ public class RomiConstants {
 
     public static final double DISTANCE_PER_PULSE =
             (Math.PI * WHEEL_DIAMETER_METERS) / COUNTS_PER_REVOLUTION;
+
+    public static double kP = 0.1;
+    public static double kI = 0.0;
+    public static double kD = 0.0;
 }

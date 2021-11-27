@@ -15,6 +15,6 @@ public class DriverXbox360 implements IDriver {
 
     @Override
     public double getY() {
-        return joy.getY(Hand.kLeft);
+        return -joy.getY(Hand.kLeft);
     }
 }

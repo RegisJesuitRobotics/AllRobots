@@ -93,6 +93,7 @@ spotless {
     }
 }
 
+
 tasks.register('updateGitHooks', Copy) {
     from './scripts/pre-commit'
     into './.git/hooks'
