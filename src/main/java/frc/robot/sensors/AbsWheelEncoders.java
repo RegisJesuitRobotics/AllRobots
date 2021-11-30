@@ -1,6 +1,8 @@
 package frc.robot.sensors;
 
-public abstract class AbsWheelEncoders {
+import edu.wpi.first.wpilibj2.command.Subsystem;
+
+public abstract class AbsWheelEncoders implements Subsystem {
     private final IEncoder leftEncoder;
     private final IEncoder rightEncoder;
 

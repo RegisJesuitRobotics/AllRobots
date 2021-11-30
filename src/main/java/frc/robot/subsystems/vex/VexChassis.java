@@ -2,10 +2,9 @@ package frc.robot.subsystems.vex;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.IChassis;
 
-public class VexChassis extends SubsystemBase implements IChassis {
+public class VexChassis implements IChassis {
     private final Spark leftMotor;
     private final Spark rightMotor;
     private final DifferentialDrive drive;

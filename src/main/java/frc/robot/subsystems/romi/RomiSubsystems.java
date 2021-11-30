@@ -31,9 +31,8 @@ public class RomiSubsystems implements ISubsystems {
             new PIDController(RomiConstants.kP, RomiConstants.kI, RomiConstants.kD);
 
     @Override
-    public void initialize() {
-    }
-        
+    public void initialize() {}
+
     @Override
     public IChassis getChassis() {
         return chassis;

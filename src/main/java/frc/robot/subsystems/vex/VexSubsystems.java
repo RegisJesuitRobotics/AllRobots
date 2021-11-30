@@ -14,14 +14,11 @@ public class VexSubsystems implements ISubsystems {
 
     private final DriverXbox360 driver = new DriverXbox360();
 
-    private final VexWheelEncoders wheelEncoders =
-            new VexWheelEncoders(
-                    new VexEncoder(VexConstants.LEFT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE),
-                    new VexEncoder(
-                            VexConstants.RIGHT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE));
+    private final VexWheelEncoders wheelEncoders = new VexWheelEncoders(
+            new VexEncoder(VexConstants.LEFT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE),
+            new VexEncoder(VexConstants.RIGHT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE));
 
-    private final PIDController pidDriveWithGyro =
-            new PIDController(VexConstants.kP, VexConstants.kI, VexConstants.kD);
+    private final PIDController pidDriveWithGyro = new PIDController(VexConstants.kP, VexConstants.kI, VexConstants.kD);
 
     private final VexGyro gyro = new VexGyro();
 

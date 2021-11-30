@@ -33,11 +33,12 @@ public class RomiGyro implements IGyro {
             m_simAngleY = gyroSimDevice.createDouble("angle_y", Direction.kInput, 0.0);
             m_simAngleZ = gyroSimDevice.createDouble("angle_z", Direction.kInput, 0.0);
         }
+
+        SmartDashboard.putData(this);
     }
 
     @Override
-    public void calibrate() {
-    }
+    public void calibrate() {}
 
     @Override
     public void reset() {
@@ -52,7 +53,7 @@ public class RomiGyro implements IGyro {
     public double getAngleZ() {
         if (m_simAngleZ != null) {
             double angle = m_simAngleZ.get() - m_angleZOffset;
-            SmartDashboard.putString("Gyro", String.format("%.3f", angle));
+            // SmartDashboard.putString("Gyro", String.format("%.3f", angle));
             return angle;
         }
 
@@ -124,9 +125,9 @@ public class RomiGyro implements IGyro {
         return 0.0;
     }
 
-    // @Override
-    // public void initSendable(SendableBuilder builder) {
-    //     // TODO Auto-generated method stub
-
-    // }
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("Gyro");
+        builder.addDoubleProperty("Value", this::getAngleZ, null);
+    }
 }

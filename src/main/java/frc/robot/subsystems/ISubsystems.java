@@ -1,10 +1,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.sensors.AbsWheelEncoders;
 import frc.robot.sensors.IGyro;
 
-public interface ISubsystems {
+public interface ISubsystems extends Subsystem {
 
     // For any systems like gyros that need to be initialized.
     public void initialize();
@@ -17,5 +18,6 @@ public interface ISubsystems {
 
     public IGyro getGyro();
 
+    // TODO Bad idea!  This shouldn't be here!
     public PIDController getPidDriveWithGyro();
 }

@@ -4,10 +4,12 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.IChassis;
+import java.util.Set;
 
-public class DriveTime extends CommandBase {
+public class DriveTime implements Command {
     private final double duration;
     private final double speed;
     private final IChassis drive;
@@ -24,7 +26,6 @@ public class DriveTime extends CommandBase {
         this.speed = speed;
         duration = time * 1000;
         this.drive = drive;
-        addRequirements(drive);
     }
 
     // Called when the command is initially scheduled.
@@ -50,5 +51,10 @@ public class DriveTime extends CommandBase {
     @Override
     public boolean isFinished() {
         return (System.currentTimeMillis() - startTime) >= duration;
+    }
+
+    @Override
+    public Set<Subsystem> getRequirements() {
+        return Set.of(drive);
     }
 }

@@ -30,12 +30,9 @@ public class VexGyro implements IGyro {
         return angle;
     }
 
-    // private void setAngleZ() {}
-
-    // @Override
-    // public void initSendable(SendableBuilder builder) {
-    //     builder.setSmartDashboardType("Gyro");
-    //     builder.addDoubleProperty("AngleZ", getAngleZ(), setAngleZ());
-    //     builder.ad
-    // }
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        // builder.setSmartDashboardType("Gyro");
+        // builder.addDoubleProperty("Value", gyro::getAngle, null);
+    }
 }

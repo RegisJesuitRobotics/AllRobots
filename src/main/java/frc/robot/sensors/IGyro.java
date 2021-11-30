@@ -1,8 +1,9 @@
 package frc.robot.sensors;
 
 import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
-public interface IGyro {
+public interface IGyro extends Sendable, Subsystem {
     public void calibrate();
 
     public void reset();

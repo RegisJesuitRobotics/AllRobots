@@ -2,10 +2,9 @@ package frc.robot.subsystems.romi;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.IChassis;
 
-public class RomiChassis extends SubsystemBase implements IChassis {
+public class RomiChassis implements IChassis {
 
     // The Romi has the left and right motors set to
     // PWM channels 0 and 1 respectively

@@ -50,6 +50,7 @@ public class DriveDistancePidGyro extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        SmartDashboard.putData(gyro);
         chassis.drive(speed, getRotationPidController());
     }
 
@@ -62,15 +63,20 @@ public class DriveDistancePidGyro extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        SmartDashboard.putString("Avg Dist", String.format("%.3f", Math.abs(encoders.getAverageDistance())));
-        return Math.abs(encoders.getAverageDistance()) >= distance;
+        double distanceTravelled = Math.abs(encoders.getAverageDistance());
+
+        SmartDashboard.putString("Avg Dist", String.format("%.3f", distanceTravelled));
+
+        return distanceTravelled >= distance;
     }
 
     private double getRotationPidController() {
         double angle = gyro.getAngleZ();
         double rotation = pidController.calculate(angle);
 
-        SmartDashboard.putString("PidController", String.format("angle: %.3f rotation: %.3f", angle, rotation));
+        // SmartDashboard.putString("PidController", String.format("angle: %.3f rotation: %.3f",
+        // angle, rotation));
+        SmartDashboard.putString("PidController", String.format("rotation: %.3f", rotation));
 
         return rotation;
     }
