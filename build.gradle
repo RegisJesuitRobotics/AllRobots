@@ -86,7 +86,7 @@ spotless {
             exclude '**/build/**', '**/build-*/**'
         }
         toggleOffOn()
-        googleJavaFormat().aosp()
+        eclipse().configFile('RJFormat.xml')
         removeUnusedImports()
         trimTrailingWhitespace()
         endWithNewline()
