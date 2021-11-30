@@ -18,6 +18,5 @@ public interface ISubsystems extends Subsystem {
 
     public IGyro getGyro();
 
-    // TODO Bad idea!  This shouldn't be here!
-    public PIDController getPidDriveWithGyro();
+    public IConstants getConstants();
 }

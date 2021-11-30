@@ -1,9 +1,9 @@
 package frc.robot.subsystems.romi;
 
-import edu.wpi.first.wpilibj.controller.PIDController;
 import frc.robot.sensors.AbsWheelEncoders;
 import frc.robot.sensors.IGyro;
 import frc.robot.subsystems.IChassis;
+import frc.robot.subsystems.IConstants;
 import frc.robot.subsystems.IDriver;
 import frc.robot.subsystems.ISubsystems;
 import frc.robot.subsystems.driver.DriverXbox360;
@@ -14,24 +14,19 @@ public class RomiSubsystems implements ISubsystems {
 
     private final DriverXbox360 driver = new DriverXbox360();
 
-    private final RomiWheelEncoders encoders =
-            new RomiWheelEncoders(
-                    new RomiEncoder(
-                            RomiConstants.LEFT_ENCODER_PORT1,
-                            RomiConstants.LEFT_ENCODER_PORT2,
-                            RomiConstants.DISTANCE_PER_PULSE),
-                    new RomiEncoder(
-                            RomiConstants.RIGHT_ENCODER_PORT1,
-                            RomiConstants.RIGHT_ENCODER_PORT2,
-                            RomiConstants.DISTANCE_PER_PULSE));
+    private final RomiWheelEncoders encoders = new RomiWheelEncoders(
+            new RomiEncoder(RomiConstants.LEFT_ENCODER_PORT1, RomiConstants.LEFT_ENCODER_PORT2,
+                    RomiConstants.DISTANCE_PER_PULSE),
+            new RomiEncoder(RomiConstants.RIGHT_ENCODER_PORT1, RomiConstants.RIGHT_ENCODER_PORT2,
+                    RomiConstants.DISTANCE_PER_PULSE));
 
     private final RomiGyro gyro = new RomiGyro();
 
-    private final PIDController pidDriveWithGyro =
-            new PIDController(RomiConstants.kP, RomiConstants.kI, RomiConstants.kD);
+    private final RomiConstants constants = new RomiConstants();
 
     @Override
-    public void initialize() {}
+    public void initialize() {
+    }
 
     @Override
     public IChassis getChassis() {
@@ -54,7 +49,7 @@ public class RomiSubsystems implements ISubsystems {
     }
 
     @Override
-    public PIDController getPidDriveWithGyro() {
-        return pidDriveWithGyro;
+    public IConstants getConstants() {
+        return constants;
     }
 }

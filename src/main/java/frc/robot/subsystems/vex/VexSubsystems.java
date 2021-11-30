@@ -1,9 +1,9 @@
 package frc.robot.subsystems.vex;
 
-import edu.wpi.first.wpilibj.controller.PIDController;
 import frc.robot.sensors.AbsWheelEncoders;
 import frc.robot.sensors.IGyro;
 import frc.robot.subsystems.IChassis;
+import frc.robot.subsystems.IConstants;
 import frc.robot.subsystems.IDriver;
 import frc.robot.subsystems.ISubsystems;
 import frc.robot.subsystems.driver.DriverXbox360;
@@ -18,9 +18,9 @@ public class VexSubsystems implements ISubsystems {
             new VexEncoder(VexConstants.LEFT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE),
             new VexEncoder(VexConstants.RIGHT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE));
 
-    private final PIDController pidDriveWithGyro = new PIDController(VexConstants.kP, VexConstants.kI, VexConstants.kD);
-
     private final VexGyro gyro = new VexGyro();
+
+    private final VexConstants constants = new VexConstants();
 
     @Override
     public void initialize() {
@@ -48,7 +48,9 @@ public class VexSubsystems implements ISubsystems {
     }
 
     @Override
-    public PIDController getPidDriveWithGyro() {
-        return pidDriveWithGyro;
+    public IConstants getConstants() {
+        return constants;
     }
+
+
 }
