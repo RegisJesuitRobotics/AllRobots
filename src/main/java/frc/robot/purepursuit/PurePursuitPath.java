@@ -8,28 +8,10 @@ import frc.robot.utils.math.Vector2d;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Setter;
 
 /** Add your docs here. */
 public class PurePursuitPath {
-    @Setter
-    private double spacing; // meters
-
     private List<PathPoint> points = new ArrayList<>();
-
-    /**
-     * @param spacing spacing between points for when points are injected (meters)
-     */
-    public PurePursuitPath(double spacing) {
-        this.spacing = spacing;
-    }
-
-    /**
-     * Creates with default spacing of 0.15 meters
-     */
-    public PurePursuitPath() {
-        this(0.15);
-    }
 
     public void addPoint(double x, double y) {
         points.add(new PathPoint(x, y));
@@ -47,6 +29,10 @@ public class PurePursuitPath {
     }
 
     public void injectPoints() {
+        this.injectPoints(0.15);
+    }
+
+    public void injectPoints(double spacing) {
         List<PathPoint> newPoints = new ArrayList<>();
 
         for (int i = 0; i < points.size() - 1; i++) {
@@ -66,6 +52,41 @@ public class PurePursuitPath {
             }
         }
         newPoints.add(points.get(points.size() - 1)); // Add the last point
+
+        points = newPoints;
+    }
+
+    /**
+     * Team 2168's smoothing algorithm
+     *
+     * @param a         weight data (around 1 - b)
+     * @param b         weight smooth: increase to get smoother path (between 0.75 -
+     *                  0.98)
+     * @param tolerance (around 0.001)
+     */
+    public void smoothPoints(double a, double b, double tolerance) {
+        List<PathPoint> newPoints = new ArrayList<>(points);
+
+        double change = tolerance;
+        while (change >= tolerance) {
+            change = 0.0;
+            for (int i = 1; i < newPoints.size() - 1; i++) {
+                PathPoint currentPoint = newPoints.get(i);
+                PathPoint previousPoint = newPoints.get(i - 1);
+                PathPoint nextPoint = newPoints.get(i + 1);
+
+                double storedX = currentPoint.getX();
+                double storedY = currentPoint.getY();
+
+                currentPoint.setX(currentPoint.getX() + (a * (points.get(i).getX() - currentPoint.getX())
+                        + b * (previousPoint.getX() + nextPoint.getX() - 2 * currentPoint.getX())));
+                currentPoint.setY(currentPoint.getY() + (a * (points.get(i).getY() - currentPoint.getY())
+                        + b * (previousPoint.getY() + nextPoint.getY() - 2 * currentPoint.getY())));
+
+                change += Math.abs(storedX - currentPoint.getX());
+                change += Math.abs(storedY - currentPoint.getY());
+            }
+        }
 
         points = newPoints;
     }

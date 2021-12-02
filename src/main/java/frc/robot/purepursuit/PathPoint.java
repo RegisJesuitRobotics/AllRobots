@@ -4,11 +4,7 @@
 
 package frc.robot.purepursuit;
 
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Class used to keep data on specific point in PurePursuit path
