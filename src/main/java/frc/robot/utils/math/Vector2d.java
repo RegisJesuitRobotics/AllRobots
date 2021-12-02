@@ -10,6 +10,13 @@ public class Vector2d {
     private double x;
     private double y;
 
+    /**
+     * Gets the vector with using point1 as the origin
+     *
+     * @param point1 point 1
+     * @param point2 point 2
+     * @return the vector
+     */
     public static Vector2d fromPathPoints(PathPoint point1, PathPoint point2) {
         return new Vector2d(point2.getX() - point1.getX(), point2.getY() - point1.getY());
     }
@@ -23,7 +30,9 @@ public class Vector2d {
     }
 
     public void normalize() {
-        divide(magnitude());
+        if (magnitude() != 0) {
+            divide(magnitude());
+        }
     }
 
     public Vector2d getNormalized() {
@@ -40,5 +49,13 @@ public class Vector2d {
     public void divide(double divider) {
         x /= divider;
         y /= divider;
+    }
+
+    public double dot(Vector2d vector2d) {
+        return (this.x * vector2d.getX() + this.y * vector2d.getY());
+    }
+
+    public static Vector2d origin() {
+        return new Vector2d(0, 0);
     }
 }

@@ -4,13 +4,17 @@
 
 package frc.robot.purepursuit;
 
+import frc.robot.utils.math.MathUtils;
 import frc.robot.utils.math.Vector2d;
 import java.util.ArrayList;
 import java.util.List;
 
 
-/** Add your docs here. */
+/**
+ * Add your docs here.
+ */
 public class PurePursuitPath {
+
     private List<PathPoint> points = new ArrayList<>();
 
     public void addPoint(double x, double y) {
@@ -96,6 +100,16 @@ public class PurePursuitPath {
         }
 
         points = newPoints;
+    }
+
+    public void calculateCurvatures() {
+        for (int i = 1; i < points.size() - 1; i++) {
+            PathPoint currentPoint = points.get(i);
+            PathPoint previousPoint = points.get(i - 1);
+            PathPoint nextPoint = points.get(i + 1);
+
+            currentPoint.setCurvature(MathUtils.getCurvature(currentPoint, previousPoint, nextPoint));
+        }
     }
 
 }

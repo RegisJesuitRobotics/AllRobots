@@ -10,8 +10,8 @@ public class PathPointTest {
         PathPoint origin = PathPoint.origin();
         PathPoint point = new PathPoint(3, 4);
 
-        assertEquals(5, origin.getDistance(point), 0);
-        assertEquals(5, point.getDistance(origin), 0);
+        assertEquals(5, PathPoint.getDistance(origin, point), 0);
+        assertEquals(5, PathPoint.getDistance(point, origin), 0);
     }
 
     @Test
@@ -19,8 +19,8 @@ public class PathPointTest {
         PathPoint origin = PathPoint.origin();
         PathPoint point = new PathPoint(3, 1);
 
-        assertEquals(3.162, origin.getDistance(point), 0.001);
-        assertEquals(3.162, point.getDistance(origin), 0.001);
+        assertEquals(3.162, PathPoint.getDistance(origin, point), 0.001);
+        assertEquals(3.162, PathPoint.getDistance(point, origin), 0.001);
     }
 
     @Test
@@ -28,8 +28,8 @@ public class PathPointTest {
         PathPoint origin = new PathPoint(1, 2);
         PathPoint point = new PathPoint(4, 6);
 
-        assertEquals(5, origin.getDistance(point), 0);
-        assertEquals(5, point.getDistance(origin), 0);
+        assertEquals(5, PathPoint.getDistance(origin, point), 0);
+        assertEquals(5, PathPoint.getDistance(point, origin), 0);
     }
 
     @Test
@@ -37,8 +37,8 @@ public class PathPointTest {
         PathPoint origin = new PathPoint(-1, -2);
         PathPoint point = new PathPoint(-4, -6);
 
-        assertEquals(5, origin.getDistance(point), 0);
-        assertEquals(5, point.getDistance(origin), 0);
+        assertEquals(5, PathPoint.getDistance(origin, point), 0);
+        assertEquals(5, PathPoint.getDistance(point, origin), 0);
     }
 
     @Test
@@ -46,8 +46,8 @@ public class PathPointTest {
         PathPoint origin = new PathPoint(-1, -2);
         PathPoint point = new PathPoint(2, 2);
 
-        assertEquals(5, origin.getDistance(point), 0);
-        assertEquals(5, point.getDistance(origin), 0);
+        assertEquals(5, PathPoint.getDistance(origin, point), 0);
+        assertEquals(5, PathPoint.getDistance(point, origin), 0);
     }
 
 }

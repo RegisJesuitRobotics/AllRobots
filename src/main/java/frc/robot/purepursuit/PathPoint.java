@@ -4,6 +4,7 @@
 
 package frc.robot.purepursuit;
 
+import frc.robot.utils.math.Vector2d;
 import lombok.Data;
 
 /**
@@ -41,11 +42,15 @@ public class PathPoint {
         this.curvature = pathPoint.getCurvature();
     }
 
+    public Vector2d getVector() {
+        return new Vector2d(x, y);
+    }
+
     public static PathPoint origin() {
         return new PathPoint(0, 0);
     }
 
-    public double getDistance(PathPoint point) {
-        return Math.sqrt(Math.pow(this.getX() - point.getX(), 2) + Math.pow(this.getY() - point.getY(), 2));
+    public static double getDistance(PathPoint point1, PathPoint point2) {
+        return Math.sqrt(Math.pow(point1.getX() - point2.getX(), 2) + Math.pow(point1.getY() - point2.getY(), 2));
     }
 }

@@ -50,7 +50,7 @@ public class PurePursuitPathTest {
 
         List<PathPoint> points = path.getPoints();
         for (int i = 0; i < points.size() - 2; i++) {
-            assertEquals(1, points.get(i).getDistance(points.get(i + 1)), 0.01);
+            assertEquals(1, PathPoint.getDistance(points.get(i), points.get(i + 1)), 0.01);
         }
     }
 
@@ -65,7 +65,7 @@ public class PurePursuitPathTest {
         List<PathPoint> points = path.getPoints();
         // 2 cause last point will be closer (or very *maybe* equal) than spacing
         for (int i = 0; i < points.size() - 2; i++) {
-            assertEquals(0.15, points.get(i).getDistance(points.get(i + 1)), 0.01);
+            assertEquals(0.15, PathPoint.getDistance(points.get(i), points.get(i + 1)), 0.01);
         }
     }
 }
