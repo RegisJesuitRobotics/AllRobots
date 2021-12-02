@@ -65,26 +65,33 @@ public class PurePursuitPath {
      * @param tolerance (around 0.001)
      */
     public void smoothPoints(double a, double b, double tolerance) {
-        List<PathPoint> newPoints = new ArrayList<>(points);
+        List<PathPoint> newPoints = new ArrayList<>();
+        for (PathPoint point : points) {
+            newPoints.add(new PathPoint(point));
+        }
 
         double change = tolerance;
         while (change >= tolerance) {
             change = 0.0;
             for (int i = 1; i < newPoints.size() - 1; i++) {
+                PathPoint beforeSmoothingPoint = points.get(i);
                 PathPoint currentPoint = newPoints.get(i);
                 PathPoint previousPoint = newPoints.get(i - 1);
                 PathPoint nextPoint = newPoints.get(i + 1);
 
-                double storedX = currentPoint.getX();
-                double storedY = currentPoint.getY();
+                double newX = currentPoint.getX();
+                double newY = currentPoint.getY();
 
-                currentPoint.setX(currentPoint.getX() + (a * (points.get(i).getX() - currentPoint.getX())
-                        + b * (previousPoint.getX() + nextPoint.getX() - 2 * currentPoint.getX())));
-                currentPoint.setY(currentPoint.getY() + (a * (points.get(i).getY() - currentPoint.getY())
-                        + b * (previousPoint.getY() + nextPoint.getY() - 2 * currentPoint.getY())));
+                newX += a * (beforeSmoothingPoint.getX() - currentPoint.getX())
+                        + b * (previousPoint.getX() + nextPoint.getX() - 2 * currentPoint.getX());
+                newY += a * (beforeSmoothingPoint.getY() - currentPoint.getY())
+                        + b * (previousPoint.getY() + nextPoint.getY() - 2 * currentPoint.getY());
 
-                change += Math.abs(storedX - currentPoint.getX());
-                change += Math.abs(storedY - currentPoint.getY());
+                change += Math.abs(currentPoint.getX() - newX);
+                change += Math.abs(currentPoint.getY() - newY);
+
+                currentPoint.setX(newX);
+                currentPoint.setY(newY);
             }
         }
 

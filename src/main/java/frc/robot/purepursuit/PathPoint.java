@@ -27,6 +27,20 @@ public class PathPoint {
         this.y = y;
     }
 
+    public PathPoint(double x, double y, double velocity, double curvature) {
+        this.x = x;
+        this.y = y;
+        this.velocity = velocity;
+        this.curvature = curvature;
+    }
+
+    public PathPoint(PathPoint pathPoint) {
+        this.x = pathPoint.getX();
+        this.y = pathPoint.getY();
+        this.velocity = pathPoint.getVelocity();
+        this.curvature = pathPoint.getCurvature();
+    }
+
     public static PathPoint origin() {
         return new PathPoint(0, 0);
     }
