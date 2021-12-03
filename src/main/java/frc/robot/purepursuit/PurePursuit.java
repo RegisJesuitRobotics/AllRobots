@@ -29,6 +29,8 @@ public class PurePursuit {
         this.path = path;
         this.lookaheadDistance = lookaheadDistance;
         this.trackWidthMeters = trackWidthMeters;
+
+        SmartDashboard.putNumber("Length", path.getSize());
     }
 
     private void updateClosestPointIndex() {
@@ -67,21 +69,19 @@ public class PurePursuit {
                 break;
             }
         }
-
         SmartDashboard.putNumber("Lookahead Index", lookaheadFractionalIndex);
     }
 
     private void updateLookaheadCurvature() {
-        double a = -currentPosition.getRotation().getTan();
-        double c = currentPosition.getRotation().getTan() * currentPosition.getX() - currentPosition.getY();
+        double a = Math.tan(-currentPosition.getRotation().getRadians());
+        double b = 1;
+        double c = a * currentPosition.getX() - currentPosition.getY();
 
-        lookaheadCurvature = 2 * ((a * lookaheadPoint.x + lookaheadPoint.y + c) / MathUtils.distanceFormula(a, 1))
-                / sqr(Point2d.distance(new Point2d(currentPosition), lookaheadPoint));
-
-        lookaheadCurvature *= Math
-                .signum(currentPosition.getRotation().getSin() * (lookaheadPoint.x - currentPosition.getX())
-                        - currentPosition.getRotation().getCos() * (lookaheadPoint.y - currentPosition.getY()));
-
+        double x = Math.abs((a * lookaheadPoint.x + b * lookaheadPoint.y + c) / MathUtils.distanceFormula(a, b));
+        lookaheadCurvature = 2 * x / sqr(lookaheadDistance);
+        lookaheadCurvature *= Math.signum(Math.sin(-currentPosition.getRotation().getRadians())
+                * (lookaheadPoint.x - currentPosition.getX())
+                - Math.cos(-currentPosition.getRotation().getRadians()) * (lookaheadPoint.y - currentPosition.getY()));
         SmartDashboard.putNumber("Lookahead curvature", lookaheadCurvature);
     }
 

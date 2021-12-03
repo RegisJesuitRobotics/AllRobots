@@ -2,7 +2,7 @@ package frc.robot.subsystems.simulation;
 
 import frc.robot.sensors.AbsWheelEncoders;
 import frc.robot.sensors.IGyro;
-import frc.robot.subsystems.IChassis;
+import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.IDriver;
 import frc.robot.subsystems.ISubsystems;
 import frc.robot.subsystems.driver.DriverXbox360;
@@ -17,7 +17,7 @@ public class SimulationSubsystems implements ISubsystems {
     private final DriverXbox360 driverXbox360 = new DriverXbox360();
 
     @Override
-    public IChassis getChassis() {
+    public Chassis getChassis() {
         return chassis;
     }
 

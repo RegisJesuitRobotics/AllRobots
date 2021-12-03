@@ -20,5 +20,5 @@ public class VexGyro implements IGyro {
     public double getAngleZ() {
         return gyro.getAngle();
     }
-    
+
 }

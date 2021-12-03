@@ -2,14 +2,12 @@ package frc.robot.subsystems.vex;
 
 import frc.robot.sensors.AbsWheelEncoders;
 import frc.robot.sensors.IGyro;
-import frc.robot.subsystems.IChassis;
+import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.IDriver;
 import frc.robot.subsystems.ISubsystems;
 import frc.robot.subsystems.driver.DriverXbox360;
 
 public class VexSubsystems implements ISubsystems {
-
-    private final VexChassis chassis = new VexChassis();
 
     private final DriverXbox360 driver = new DriverXbox360();
 
@@ -19,8 +17,10 @@ public class VexSubsystems implements ISubsystems {
 
     private final VexGyro gyro = new VexGyro();
 
+    private final VexChassis chassis = new VexChassis(gyro, wheelEncoders);
+
     @Override
-    public IChassis getChassis() {
+    public Chassis getChassis() {
         return chassis;
     }
 

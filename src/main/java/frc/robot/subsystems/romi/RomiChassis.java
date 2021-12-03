@@ -2,10 +2,11 @@ package frc.robot.subsystems.romi;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.IChassis;
+import frc.robot.sensors.AbsWheelEncoders;
+import frc.robot.sensors.IGyro;
+import frc.robot.subsystems.Chassis;
 
-public class RomiChassis extends SubsystemBase implements IChassis {
+public class RomiChassis extends Chassis {
 
     // The Romi has the left and right motors set to
     // PWM channels 0 and 1 respectively
@@ -15,10 +16,8 @@ public class RomiChassis extends SubsystemBase implements IChassis {
     // Set up the differential drive controller
     private final DifferentialDrive diffDrive = new DifferentialDrive(leftMotor, rightMotor);
 
-    @Override
-    public void initialize() {
-        // diffDrive.setSafetyEnabled(false);
-        // diffDrive.setExpiration(0.5);
+    protected RomiChassis(IGyro gyro, AbsWheelEncoders encoders) {
+        super(gyro, encoders);
     }
 
     @Override

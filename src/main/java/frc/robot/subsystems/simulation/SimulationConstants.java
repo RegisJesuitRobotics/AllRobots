@@ -10,6 +10,8 @@ public class SimulationConstants {
     public static int[] LEFT_ENCODER_PORTS = new int[]{ 6, 7 };
     public static int[] RIGHT_ENCODER_PORTS = new int[]{ 8, 9 };
 
+    public static double TRACK_WIDTH = Units.inchesToMeters(26);
+
     public static double GEARING = 10.71;
     public static double WHEEL_DIAMETER_METERS = Units.inchesToMeters(6);
 
