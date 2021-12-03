@@ -13,12 +13,23 @@ public class Vector2d {
     /**
      * Gets the vector with using point1 as the origin
      *
-     * @param point1 point 1
+     * @param point1 point 1 (will become the origin)
      * @param point2 point 2
      * @return the vector
      */
     public static Vector2d fromPathPoints(PathPoint point1, PathPoint point2) {
         return new Vector2d(point2.getX() - point1.getX(), point2.getY() - point1.getY());
+    }
+
+    /**
+     * Gets the vector with using point1 as the origin
+     *
+     * @param point1 point 1 (will become the origin)
+     * @param point2 point 2
+     * @return the vector
+     */
+    public static Vector2d fromPoints(Point2d point1, Point2d point2) {
+        return new Vector2d(point2.x - point1.x, point2.y - point1.y);
     }
 
     public Vector2d(Vector2d clone) {

@@ -31,4 +31,9 @@ public class RomiEncoder implements IEncoder {
     public double getDistance() {
         return encoder.getDistance();
     }
+
+    @Override
+    public double getRate() {
+        return encoder.getRate();
+    }
 }

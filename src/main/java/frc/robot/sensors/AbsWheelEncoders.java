@@ -22,6 +22,22 @@ public abstract class AbsWheelEncoders {
         return rightEncoder.get();
     }
 
+    public double getLeftDistance() {
+        return leftEncoder.getDistance();
+    }
+
+    public double getRightDistance() {
+        return rightEncoder.getDistance();
+    }
+
+    public double getLeftRate() {
+        return leftEncoder.getRate();
+    }
+
+    public double getRightRate() {
+        return rightEncoder.getRate();
+    }
+
     public double getAverageCount() {
         return Math.abs((leftEncoder.get() + rightEncoder.get()) / 2);
     }

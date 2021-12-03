@@ -12,7 +12,7 @@ public class PurePursuitPathTest {
 
     @BeforeEach
     void setUp() {
-        path = new PurePursuitPath();
+        path = new PurePursuitPath(0.625);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class PurePursuitPathTest {
     void getPoints_ReturnsCopyOfList() {
         path.addPoint(0, 0);
 
-        List<PathPoint> points = path.getPoints();
+        List<PathPoint> points = path.getPointsCopy();
         points.clear(); // If it wasn't a copy the points list would be affected
 
         assertEquals(1, path.getSize());
@@ -48,9 +48,9 @@ public class PurePursuitPathTest {
 
         path.injectPoints(1);
 
-        List<PathPoint> points = path.getPoints();
+        List<PathPoint> points = path.getPointsCopy();
         for (int i = 0; i < points.size() - 2; i++) {
-            assertEquals(1, PathPoint.getDistance(points.get(i), points.get(i + 1)), 0.01);
+            assertEquals(1, PathPoint.distance(points.get(i), points.get(i + 1)), 0.01);
         }
     }
 
@@ -62,10 +62,10 @@ public class PurePursuitPathTest {
 
         path.injectPoints();
 
-        List<PathPoint> points = path.getPoints();
+        List<PathPoint> points = path.getPointsCopy();
         // 2 cause last point will be closer (or very *maybe* equal) than spacing
         for (int i = 0; i < points.size() - 2; i++) {
-            assertEquals(0.15, PathPoint.getDistance(points.get(i), points.get(i + 1)), 0.01);
+            assertEquals(0.15, PathPoint.distance(points.get(i), points.get(i + 1)), 0.01);
         }
     }
 }

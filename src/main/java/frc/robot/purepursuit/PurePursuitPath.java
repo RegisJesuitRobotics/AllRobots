@@ -4,6 +4,10 @@
 
 package frc.robot.purepursuit;
 
+import static frc.robot.utils.math.MathUtils.sqr;
+
+import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.utils.math.MathUtils;
 import frc.robot.utils.math.Vector2d;
 import java.util.ArrayList;
@@ -13,9 +17,14 @@ import java.util.List;
 /**
  * Add your docs here.
  */
-public class PurePursuitPath {
+public class PurePursuitPath implements Sendable {
 
     private List<PathPoint> points = new ArrayList<>();
+    private final double maxVelocity;
+
+    public PurePursuitPath(double maxVelocity) {
+        this.maxVelocity = maxVelocity;
+    }
 
     public void addPoint(double x, double y) {
         points.add(new PathPoint(x, y));
@@ -28,8 +37,16 @@ public class PurePursuitPath {
     /**
      * @return a COPY of the list of points
      */
+    public List<PathPoint> getPointsCopy() {
+        List<PathPoint> copy = new ArrayList<>();
+        for (PathPoint point : points) {
+            copy.add(new PathPoint(point));
+        }
+        return copy;
+    }
+
     public List<PathPoint> getPoints() {
-        return new ArrayList<>(points);
+        return points;
     }
 
     public void injectPoints() {
@@ -69,10 +86,7 @@ public class PurePursuitPath {
      * @param tolerance (around 0.001)
      */
     public void smoothPoints(double a, double b, double tolerance) {
-        List<PathPoint> newPoints = new ArrayList<>();
-        for (PathPoint point : points) {
-            newPoints.add(new PathPoint(point));
-        }
+        List<PathPoint> newPoints = getPointsCopy();
 
         double change = tolerance;
         while (change >= tolerance) {
@@ -102,14 +116,57 @@ public class PurePursuitPath {
         points = newPoints;
     }
 
+    /**
+     * Calculates the curvature of a point using `MathUtils.getCurvature()`
+     */
     public void calculateCurvatures() {
         for (int i = 1; i < points.size() - 1; i++) {
             PathPoint currentPoint = points.get(i);
             PathPoint previousPoint = points.get(i - 1);
             PathPoint nextPoint = points.get(i + 1);
 
-            currentPoint.setCurvature(MathUtils.getCurvature(currentPoint, previousPoint, nextPoint));
+            double pointCurvature = MathUtils.getCurvature(currentPoint, previousPoint, nextPoint);
+            currentPoint.setCurvature(pointCurvature);
         }
     }
 
+    /**
+     * Calculates maximum target velocity for each point using velocityConstant /
+     * curvature. `PurePursuitPath#calculateCurvatures` should be called before
+     * this!
+     *
+     * @param velocityConstant how fast a bot should go around a turn. (1-5
+     *                         recommended)
+     */
+    public void calculateMaxVelocities(double velocityConstant) {
+        for (int i = 1; i < points.size() - 1; i++) {
+            PathPoint currentPoint = points.get(i);
+            currentPoint.setMaxVelocity(Math.min(maxVelocity, velocityConstant / currentPoint.getCurvature()));
+        }
+        points.get(0).setMaxVelocity(points.get(1).getMaxVelocity());
+    }
+
+    /**
+     * Calculates the target velocity for each point.
+     * `PurePursuitPath#calculateMaxVelocities` should be called before this!
+     *
+     * @param maxAcceleration The maximum acceleration in m/s
+     */
+    public void calculateVelocities(double maxAcceleration) {
+        points.get(points.size() - 1).setVelocity(0); // Stop at end of path
+
+        for (int i = points.size() - 2; i >= 0; i--) {
+            PathPoint currentPoint = points.get(i);
+            PathPoint nextPoint = points.get(i + 1);
+
+            currentPoint.setVelocity(Math.min(currentPoint.getMaxVelocity(), Math.sqrt(
+                    sqr(nextPoint.getVelocity()) + 2 * maxAcceleration * PathPoint.distance(currentPoint, nextPoint))));
+        }
+        System.out.println(points.get(3).getVelocity());
+    }
+
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.addDoubleProperty("Size", points::size, null);
+    }
 }

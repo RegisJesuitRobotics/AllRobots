@@ -6,4 +6,6 @@ public interface IChassis extends Subsystem {
     public void initialize();
 
     public void drive(double speed, double rot);
+
+    public void tankDrive(double leftSpeed, double rightSpeed);
 }
