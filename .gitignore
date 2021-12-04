@@ -209,6 +209,7 @@ modules.xml
 
 # Package Files #
 *.jar
+!libs/*.jar
 *.war
 *.nar
 *.ear
@@ -334,3 +335,4 @@ gradle-app.setting
 .classpath
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,c++,java,linux,macos,gradle,windows,visualstudiocode,eclipse
+imgui.ini

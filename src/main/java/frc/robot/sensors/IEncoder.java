@@ -6,4 +6,6 @@ public interface IEncoder {
     public double get();
 
     public double getDistance();
+
+    public double getRate();
 }

@@ -4,7 +4,7 @@ import frc.robot.sensors.AbsWheelEncoders;
 import frc.robot.sensors.IGyro;
 
 public interface ISubsystems {
-    public IChassis getChassis();
+    public Chassis getChassis();
 
     public IDriver getDriver();
 
