@@ -2,22 +2,24 @@ package frc.robot.purepursuit;
 
 import static frc.robot.utils.math.MathUtils.sqr;
 
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.utils.math.MathUtils;
 import frc.robot.utils.math.Point2d;
 import java.util.List;
 
-public class PurePursuit {
+public class PurePursuit implements Sendable {
 
     private final PurePursuitPath path;
-    private final double lookaheadDistance;
     private final double trackWidthMeters;
+    private final Point2d lookaheadPoint = new Point2d(0, 0);
+    private double lookaheadDistance;
     private Pose2d currentPosition;
     private int closestPointIndex = 0;
     private double lookaheadFractionalIndex = 0;
-    private final Point2d lookaheadPoint = new Point2d(0, 0);
     private double lookaheadCurvature = 0;
 
     /**
@@ -31,6 +33,7 @@ public class PurePursuit {
         this.trackWidthMeters = trackWidthMeters;
 
         SmartDashboard.putNumber("Length", path.getSize());
+        SmartDashboard.putData("Pure Pursuit", this);
     }
 
     private void updateClosestPointIndex() {
@@ -106,4 +109,25 @@ public class PurePursuit {
         return closestPointIndex == path.getSize() - 1;
     }
 
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("PurePursuit");
+        List<PathPoint> points = path.getPoints();
+        double[] xValues = new double[points.size()];
+        double[] yValues = new double[points.size()];
+
+        for (int i = 0; i < points.size(); i++) {
+            xValues[i] = points.get(i).getX();
+            yValues[i] = points.get(i).getY();
+        }
+
+        builder.addDoubleArrayProperty("xValues", () -> xValues, null);
+        builder.addDoubleArrayProperty("yValues", () -> yValues, null);
+        builder.addDoubleProperty("robotX", () -> currentPosition.getX(), null);
+        builder.addDoubleProperty("robotY", () -> currentPosition.getY(), null);
+        builder.addDoubleProperty("lookaheadDistance", () -> lookaheadDistance, value -> {
+            lookaheadDistance = value;
+        });
+        builder.addDoubleProperty("lookaheadCurvature", () -> lookaheadCurvature, null);
+    }
 }

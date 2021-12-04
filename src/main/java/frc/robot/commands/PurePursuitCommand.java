@@ -33,10 +33,10 @@ public class PurePursuitCommand extends CommandBase {
         // method (which takes a vararg of Subsystem)
         addRequirements(chassis);
         PurePursuitPath path = new PurePursuitPath(MAX_VELOCITY);
-//        path.addPoint(0, 0);
-//        path.addPoint(5, 5);
         path.addPoint(0, 0);
-        path.addPoint(13, 0);
+        path.addPoint(15.9766, 7.8994);
+//        path.addPoint(8, 0);
+//        path.addPoint(13, 0);
 
         path.injectPoints();
         path.smoothPoints(0.3, 0.7, 0.001);
