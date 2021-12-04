@@ -1,14 +1,14 @@
 package frc.robot.commands;
 
+import com.regisjesuit.purepursuit.PurePursuit;
+import com.regisjesuit.purepursuit.path.PathPoint;
+import com.regisjesuit.purepursuit.path.PurePursuitPath;
 import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpiutil.math.MathUtil;
-import frc.robot.purepursuit.PathPoint;
-import frc.robot.purepursuit.PurePursuit;
-import frc.robot.purepursuit.PurePursuitPath;
 import frc.robot.sensors.AbsWheelEncoders;
 import frc.robot.subsystems.Chassis;
 
@@ -18,10 +18,11 @@ public class PurePursuitCommand extends CommandBase {
     private final Chassis chassis;
     private final AbsWheelEncoders encoders;
     private final PurePursuit purePursuit;
-    private final SlewRateLimiter rateLimiter;
+    private final SlewRateLimiter leftRateLimiter;
+    private final SlewRateLimiter rightRateLimiter;
 
-    private final double KV = 0.357;
-    private final double KA = 0.004;
+    private final double KV = 0.355;
+    private final double KA = 0.002;
     private final double KP = 0.01;
 
     private final double MAX_VELOCITY = 2;
@@ -35,12 +36,10 @@ public class PurePursuitCommand extends CommandBase {
         PurePursuitPath path = new PurePursuitPath(MAX_VELOCITY);
         path.addPoint(0, 0);
         path.addPoint(15.9766, 7.8994);
-//        path.addPoint(8, 0);
-//        path.addPoint(13, 0);
+//        path.addPoint(10, 0);
 
         path.injectPoints();
         path.smoothPoints(0.3, 0.7, 0.001);
-        SmartDashboard.putData(path);
 
         path.calculateCurvatures();
         path.calculateMaxVelocities(1);
@@ -50,8 +49,11 @@ public class PurePursuitCommand extends CommandBase {
             System.out.println(point);
         }
 
-        purePursuit = new PurePursuit(path, 0.5, Units.inchesToMeters(26));
-        rateLimiter = new SlewRateLimiter(MAX_VELOCITY);
+        purePursuit = new PurePursuit(path, 1, Units.inchesToMeters(26));
+        SmartDashboard.putData("Pure Pursuit", purePursuit);
+        leftRateLimiter = new SlewRateLimiter(MAX_VELOCITY);
+        rightRateLimiter = new SlewRateLimiter(MAX_VELOCITY);
+
     }
 
     /**
@@ -71,8 +73,8 @@ public class PurePursuitCommand extends CommandBase {
     public void execute() {
         DifferentialDriveWheelSpeeds speeds = purePursuit.calculate(chassis.getPosition());
 
-        speeds.leftMetersPerSecond = rateLimiter.calculate(speeds.leftMetersPerSecond);
-        speeds.rightMetersPerSecond = rateLimiter.calculate(speeds.rightMetersPerSecond);
+        speeds.leftMetersPerSecond = leftRateLimiter.calculate(speeds.leftMetersPerSecond);
+        speeds.rightMetersPerSecond = rightRateLimiter.calculate(speeds.rightMetersPerSecond);
 
         SmartDashboard.putNumber("Target Left", speeds.leftMetersPerSecond);
         SmartDashboard.putNumber("Target right", speeds.rightMetersPerSecond);
