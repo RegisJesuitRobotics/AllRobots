@@ -35,6 +35,13 @@ public class PurePursuitCommand extends CommandBase {
         addRequirements(chassis);
         PurePursuitPath path = new PurePursuitPath(MAX_VELOCITY);
         path.addPoint(0, 0);
+        path.addPoint(1, 0.1);
+        path.addPoint(2.5, 0.5);
+        path.addPoint(4, 4);
+        path.addPoint(5.5, 6.2);
+        path.addPoint(7.5, 4.5);
+        path.addPoint(9, 1);
+        path.addPoint(11.4, 0.2);
         path.addPoint(15.9766, 7.8994);
 //        path.addPoint(10, 0);
 
@@ -42,7 +49,7 @@ public class PurePursuitCommand extends CommandBase {
         path.smoothPoints(0.3, 0.7, 0.001);
 
         path.calculateCurvatures();
-        path.calculateMaxVelocities(1);
+        path.calculateMaxVelocities(5);
         path.calculateVelocities(MAX_VELOCITY);
 
         for (PathPoint point : path.getPoints()) {

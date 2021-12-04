@@ -74,7 +74,9 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.22'
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'  
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    implementation files('libs/lib-1.0.jar')
 }
 
 // Simulation configuration (e.g. environment variables).
