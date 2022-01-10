@@ -10,9 +10,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.DriveDistance;
 import frc.robot.commands.DriveDistancePidCommand;
 import frc.robot.commands.DriveDistancePidGyro;
+import frc.robot.commands.ShootCommand;
 // import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ISubsystems;
 
@@ -75,7 +77,12 @@ public class RobotContainer {
         // return null;
         // return new DriveTime(0.8, 5, subsystems.getChassis());
         // return new DriveDistance(0.8, 1, subsystems.getChassis(), subsystems.getWheelEncoders());
-        return new DriveDistancePidCommand(1, subsystems);
+        // return new DriveDistancePidCommand(1, subsystems);
+        return new SequentialCommandGroup(
+            new DriveDistancePidCommand(0.5, subsystems),
+            new ShootCommand(subsystems.getShooter()),
+            new DriveDistancePidCommand(0.5, subsystems)
+        );
     }
 
     public Command getDriveCommand() {

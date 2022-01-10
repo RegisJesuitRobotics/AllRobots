@@ -5,6 +5,7 @@ import frc.robot.sensors.IGyro;
 import frc.robot.subsystems.IChassis;
 import frc.robot.subsystems.IConstants;
 import frc.robot.subsystems.IDriver;
+import frc.robot.subsystems.IShooter;
 import frc.robot.subsystems.ISubsystems;
 import frc.robot.subsystems.driver.DriverXbox360;
 
@@ -23,6 +24,8 @@ public class RomiSubsystems implements ISubsystems {
     private final RomiGyro gyro = new RomiGyro();
 
     private final RomiConstants constants = new RomiConstants();
+
+    private final RomiShooter shooter = new RomiShooter();
 
     @Override
     public void initialize() {
@@ -51,5 +54,10 @@ public class RomiSubsystems implements ISubsystems {
     @Override
     public IConstants getConstants() {
         return constants;
+    }
+
+    @Override
+    public IShooter getShooter() {
+        return shooter;
     }
 }

@@ -5,6 +5,7 @@ import frc.robot.sensors.IGyro;
 import frc.robot.subsystems.IChassis;
 import frc.robot.subsystems.IConstants;
 import frc.robot.subsystems.IDriver;
+import frc.robot.subsystems.IShooter;
 import frc.robot.subsystems.ISubsystems;
 import frc.robot.subsystems.driver.DriverXbox360;
 
@@ -50,6 +51,12 @@ public class VexSubsystems implements ISubsystems {
     @Override
     public IConstants getConstants() {
         return constants;
+    }
+
+    @Override
+    public IShooter getShooter() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 
