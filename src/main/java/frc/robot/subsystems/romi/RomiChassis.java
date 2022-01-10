@@ -2,6 +2,7 @@ package frc.robot.subsystems.romi;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.IChassis;
 
 public class RomiChassis implements IChassis {
