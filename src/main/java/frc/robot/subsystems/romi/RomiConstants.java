@@ -9,6 +9,8 @@ public class RomiConstants implements IConstants {
     public static final int LEFT_MOTOR_PORT = 0;
     public static final int RIGHT_MOTOR_PORT = 1;
 
+    public static final int SERVO_SHOOTER_PORT = 3;
+
     public static final int LEFT_ENCODER_PORT1 = 4;
     public static final int LEFT_ENCODER_PORT2 = 5;
     public static final int RIGHT_ENCODER_PORT1 = 6;

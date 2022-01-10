@@ -18,4 +18,6 @@ public interface ISubsystems extends Subsystem {
     public IGyro getGyro();
 
     public IConstants getConstants();
+
+    public IShooter getShooter();
 }
