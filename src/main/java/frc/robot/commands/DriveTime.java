@@ -16,10 +16,11 @@ public class DriveTime implements Command {
     private long startTime;
 
     /**
-     * Creates a new DriveTime. This command will drive your robot for a desired speed and time.
+     * Creates a new DriveTime. This command will drive your robot for a desired
+     * speed and time.
      *
      * @param speed The speed which the robot will drive. Negative is in reverse.
-     * @param time How much time to drive in seconds
+     * @param time  How much time to drive in seconds
      * @param drive The drivetrain subsystem on which this command will run
      */
     public DriveTime(double speed, double time, IChassis drive) {

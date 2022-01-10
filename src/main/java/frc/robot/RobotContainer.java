@@ -10,17 +10,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import frc.robot.commands.DriveDistance;
 import frc.robot.commands.DriveDistancePidCommand;
-import frc.robot.commands.DriveDistancePidGyro;
 // import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ISubsystems;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a "declarative" paradigm, very little robot logic should
+ * actually be handled in the {@link Robot} periodic methods (other than the
+ * scheduler calls). Instead, the structure of the robot (including subsystems,
+ * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
@@ -37,7 +36,9 @@ public class RobotContainer {
 
     // Commands
 
-    /** The container for the robot. Contains subsystems, OI devices, and commands. */
+    /**
+     * The container for the robot. Contains subsystems, OI devices, and commands.
+     */
     public RobotContainer() {
 
         // Configure the button bindings
@@ -48,19 +49,19 @@ public class RobotContainer {
         SmartDashboard.putData(robotChooser);
 
         // if (robotChooser.getSelected() == Robots.VEX) {
-        //     subsystems = new frc.robot.subsystems.vex.VexSubsystems();
+        // subsystems = new frc.robot.subsystems.vex.VexSubsystems();
         // } else {
-        //     subsystems = new frc.robot.subsystems.romi.RomiSubsystems();
+        // subsystems = new frc.robot.subsystems.romi.RomiSubsystems();
         // }
 
         subsystems.initialize();
     }
 
     /**
-     * Use this method to define your button->command mappings. Buttons can be created by
-     * instantiating a {@link GenericHID} or one of its subclasses ({@link
-     * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-     * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+     * Use this method to define your button->command mappings. Buttons can be
+     * created by instantiating a {@link GenericHID} or one of its subclasses
+     * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
+     * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {}
 
@@ -74,24 +75,20 @@ public class RobotContainer {
         // return m_autoCommand;
         // return null;
         // return new DriveTime(0.8, 5, subsystems.getChassis());
-        // return new DriveDistance(0.8, 1, subsystems.getChassis(), subsystems.getWheelEncoders());
+        // return new DriveDistance(0.8, 1, subsystems.getChassis(),
+        // subsystems.getWheelEncoders());
         return new DriveDistancePidCommand(1, subsystems);
     }
 
     public Command getDriveCommand() {
         return new RunCommand(
-                () ->
-                        subsystems
-                                .getChassis()
-                                .drive(
-                                        subsystems.getDriver().getY(),
-                                        subsystems.getDriver().getX()),
+                () -> subsystems.getChassis().drive(subsystems.getDriver().getY(), subsystems.getDriver().getX()),
                 subsystems.getChassis());
     }
     // Default operator drive command
     // subsystems.getChassis().setDefaultCommand(
-    //   new RunCommand(() -> subsystems.getChassis().drive(
-    //     subsystems.getDriver().getY(),
-    //     subsystems.getDriver().getX()),
-    //     subsystems.getChassis()));
+    // new RunCommand(() -> subsystems.getChassis().drive(
+    // subsystems.getDriver().getY(),
+    // subsystems.getDriver().getX()),
+    // subsystems.getChassis()));
 }

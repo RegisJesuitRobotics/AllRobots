@@ -25,8 +25,7 @@ public class RomiSubsystems implements ISubsystems {
     private final RomiConstants constants = new RomiConstants();
 
     @Override
-    public void initialize() {
-    }
+    public void initialize() {}
 
     @Override
     public IChassis getChassis() {

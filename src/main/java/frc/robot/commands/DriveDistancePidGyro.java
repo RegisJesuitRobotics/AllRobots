@@ -21,13 +21,8 @@ public class DriveDistancePidGyro extends CommandBase {
     private final PIDController pidController;
 
     /** Creates a new DriveDistance. */
-    public DriveDistancePidGyro(
-            double speed,
-            double distanceMeters,
-            IChassis chassis,
-            AbsWheelEncoders encoders,
-            IGyro gyro,
-            PIDController pidController) {
+    public DriveDistancePidGyro(double speed, double distanceMeters, IChassis chassis, AbsWheelEncoders encoders,
+            IGyro gyro, PIDController pidController) {
         this.speed = speed;
         this.distance = distanceMeters;
         this.chassis = chassis;
@@ -74,7 +69,8 @@ public class DriveDistancePidGyro extends CommandBase {
         double angle = gyro.getAngleZ();
         double rotation = pidController.calculate(angle);
 
-        // SmartDashboard.putString("PidController", String.format("angle: %.3f rotation: %.3f",
+        // SmartDashboard.putString("PidController", String.format("angle: %.3f
+        // rotation: %.3f",
         // angle, rotation));
         SmartDashboard.putString("PidController", String.format("rotation: %.3f", rotation));
 

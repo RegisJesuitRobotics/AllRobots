@@ -60,7 +60,7 @@ public class DriveDistancePidCommand implements Command {
 
         return distanceTravelled >= distanceMeters;
     }
-    
+
     @Override
     public void end(boolean interrupted) {
         chassis.drive(0, 0);
@@ -70,7 +70,8 @@ public class DriveDistancePidCommand implements Command {
         double angle = gyro.getAngleZ();
         double rotation = pidController.calculate(angle);
 
-        // SmartDashboard.putString("PidController", String.format("angle: %.3f rotation: %.3f",
+        // SmartDashboard.putString("PidController", String.format("angle: %.3f
+        // rotation: %.3f",
         // angle, rotation));
         SmartDashboard.putString("PidController", String.format("rotation: %.3f", rotation));
 
