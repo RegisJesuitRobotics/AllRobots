@@ -2,10 +2,9 @@ package frc.robot.subsystems.vex;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.IChassis;
 
-public class VexChassis extends SubsystemBase implements IChassis {
+public class VexChassis implements IChassis {
     private final Spark leftMotor;
     private final Spark rightMotor;
     private final DifferentialDrive drive;
@@ -16,7 +15,7 @@ public class VexChassis extends SubsystemBase implements IChassis {
 
         drive = new DifferentialDrive(leftMotor, rightMotor);
     }
-    
+
     @Override
     public void initialize() {
         drive.setSafetyEnabled(false);
@@ -25,6 +24,6 @@ public class VexChassis extends SubsystemBase implements IChassis {
 
     @Override
     public void drive(double speed, double rot) {
-        drive.arcadeDrive(speed, -rot);
+        drive.arcadeDrive(-speed, -rot);
     }
 }

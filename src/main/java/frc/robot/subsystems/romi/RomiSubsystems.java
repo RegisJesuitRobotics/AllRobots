@@ -3,6 +3,7 @@ package frc.robot.subsystems.romi;
 import frc.robot.sensors.AbsWheelEncoders;
 import frc.robot.sensors.IGyro;
 import frc.robot.subsystems.IChassis;
+import frc.robot.subsystems.IConstants;
 import frc.robot.subsystems.IDriver;
 import frc.robot.subsystems.ISubsystems;
 import frc.robot.subsystems.driver.DriverXbox360;
@@ -20,6 +21,12 @@ public class RomiSubsystems implements ISubsystems {
                     RomiConstants.DISTANCE_PER_PULSE));
 
     private final RomiGyro gyro = new RomiGyro();
+
+    private final RomiConstants constants = new RomiConstants();
+
+    @Override
+    public void initialize() {
+    }
 
     @Override
     public IChassis getChassis() {
@@ -39,5 +46,10 @@ public class RomiSubsystems implements ISubsystems {
     @Override
     public IGyro getGyro() {
         return gyro;
+    }
+
+    @Override
+    public IConstants getConstants() {
+        return constants;
     }
 }

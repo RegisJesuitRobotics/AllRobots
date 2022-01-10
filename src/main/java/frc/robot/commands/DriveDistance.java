@@ -4,11 +4,13 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.sensors.AbsWheelEncoders;
 import frc.robot.subsystems.IChassis;
+import java.util.Set;
 
-public class DriveDistance extends CommandBase {
+public class DriveDistance implements Command {
 
     private final double speed;
     private final IChassis chassis;
@@ -22,9 +24,6 @@ public class DriveDistance extends CommandBase {
         this.distance = distanceMeters;
         this.chassis = chassis;
         this.encoders = encoders;
-
-        // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(chassis);
     }
 
     // Called when the command is initially scheduled.
@@ -50,5 +49,10 @@ public class DriveDistance extends CommandBase {
     @Override
     public boolean isFinished() {
         return Math.abs(encoders.getAverageDistance()) >= distance;
+    }
+
+    @Override
+    public Set<Subsystem> getRequirements() {
+        return Set.of(chassis);
     }
 }

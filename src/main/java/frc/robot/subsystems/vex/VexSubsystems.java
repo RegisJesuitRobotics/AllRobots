@@ -3,6 +3,7 @@ package frc.robot.subsystems.vex;
 import frc.robot.sensors.AbsWheelEncoders;
 import frc.robot.sensors.IGyro;
 import frc.robot.subsystems.IChassis;
+import frc.robot.subsystems.IConstants;
 import frc.robot.subsystems.IDriver;
 import frc.robot.subsystems.ISubsystems;
 import frc.robot.subsystems.driver.DriverXbox360;
@@ -18,6 +19,13 @@ public class VexSubsystems implements ISubsystems {
             new VexEncoder(VexConstants.RIGHT_ENCODER_PORT, VexConstants.DISTANCE_PER_PULSE));
 
     private final VexGyro gyro = new VexGyro();
+
+    private final VexConstants constants = new VexConstants();
+
+    @Override
+    public void initialize() {
+        gyro.calibrate();
+    }
 
     @Override
     public IChassis getChassis() {
@@ -38,4 +46,11 @@ public class VexSubsystems implements ISubsystems {
     public IGyro getGyro() {
         return gyro;
     }
+
+    @Override
+    public IConstants getConstants() {
+        return constants;
+    }
+
+
 }
