@@ -1,6 +1,6 @@
 package frc.robot.subsystems.vex;
 
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.subsystems.IChassis;
 
@@ -12,6 +12,7 @@ public class VexChassis implements IChassis {
     public VexChassis() {
         leftMotor = new Spark(VexConstants.LEFT_MOTOR_PORT);
         rightMotor = new Spark(VexConstants.RIGHT_MOTOR_PORT);
+        rightMotor.setInverted(true);
 
         drive = new DifferentialDrive(leftMotor, rightMotor);
     }

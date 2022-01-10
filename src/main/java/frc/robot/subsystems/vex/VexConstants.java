@@ -1,7 +1,7 @@
 package frc.robot.subsystems.vex;
 
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.util.Units;
+import edu.wpi.first.math.util.Units;
 import frc.robot.subsystems.IConstants;
 
 public class VexConstants implements IConstants {
