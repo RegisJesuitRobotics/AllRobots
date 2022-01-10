@@ -1,6 +1,6 @@
 package frc.robot.sensors;
 
-import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public interface IGyro extends Sendable, Subsystem {

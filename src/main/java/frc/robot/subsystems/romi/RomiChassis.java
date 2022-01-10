@@ -1,8 +1,7 @@
 package frc.robot.subsystems.romi;
 
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.IChassis;
 
 public class RomiChassis implements IChassis {
@@ -17,6 +16,7 @@ public class RomiChassis implements IChassis {
 
     @Override
     public void initialize() {
+        rightMotor.setInverted(true);
         // diffDrive.setSafetyEnabled(false);
         // diffDrive.setExpiration(0.5);
     }

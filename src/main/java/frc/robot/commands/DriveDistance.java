@@ -18,8 +18,7 @@ public class DriveDistance implements Command {
     private final AbsWheelEncoders encoders;
 
     /** Creates a new DriveDistance. */
-    public DriveDistance(
-            double speed, double distanceMeters, IChassis chassis, AbsWheelEncoders encoders) {
+    public DriveDistance(double speed, double distanceMeters, IChassis chassis, AbsWheelEncoders encoders) {
         this.speed = speed;
         this.distance = distanceMeters;
         this.chassis = chassis;
